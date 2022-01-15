@@ -64,6 +64,10 @@
 			text-decoration: underline;
 		}
 
+		h3 {
+			color: red;
+		}
+
 		@media (prefers-color-scheme: dark) {
 			body {
 				background-color: #282828;
@@ -71,6 +75,10 @@
 
 			header, footer {
 				color: #DBCBBD;
+			}
+
+			h3 {
+				color: red;
 			}
 
 			form {
@@ -111,8 +119,8 @@
 	if (isset($_POST['username']) && isset($_POST['password'])) {
 		session_start();
 
-		include '../config/config.php';
-		include '../config/db.php';
+		include '../database/config.php';
+		include '../database/db.php';
 
 		$username = $_POST['username'];
 		$password = $_POST['password'];
@@ -130,7 +138,8 @@
 				header('Location: ../src/menu.php');
 			}
 		} else {
-			echo '<p>Usuario o contraseña incorrectos</p>';
+			echo '<h3>Usuario o contraseña incorrectos</h3>';
+			session_destroy();
 		}
 		mysqli_free_result($result);
 		mysqli_close($cnx);

@@ -4,21 +4,98 @@
 	<meta charset="UTF-8">
 	<meta name="viewport"
 				content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<style>
+		html {
+			font-family: BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+		}
+
+		header {
+			background-color: #006699;
+			color: #fff;
+			padding: 5px;
+			font-size: 1.2em;
+			font-weight: bold;
+			text-align: center;
+			border-radius: 10px 10px 0 0;
+		}
+
+		main {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			justify-content: center;
+			align-items: center;
+			margin-top: 10px;
+			padding: 10px;
+			background-color: #eee;
+			border-radius: 10px;
+		}
+
+		form {
+			display: grid;
+			place-content: center;
+		}
+
+		input {
+			border-radius: 6px;
+			border: solid black 1px;
+			padding: 5px;
+			box-shadow: 5px 5px 5px #ccc;
+		}
+	</style>
 	<title>Menú Principal</title>
 </head>
 <body>
-	<h1>Menú Principal</h1>
+<header>
+	<h1>Menú Principal LotoPlus</h1>
 	<?php
-	session_start();
-		if (isset($_SESSION['id'])) {
-			echo "<p>Bienvenido, " . $_SESSION['name'] . "</p>";
-		}
+	include './functions.php';
+	checkSession();
 	?>
-	<ul>
-		<li><a href="index.php">Modificar datos personales</a></li>
-		<li><a href="formulario.php">Gestión de participaciones</a></li>
-		<li><a href="consulta.php">Gestión de premios</a></li>
-		<li><a href="salir.php">Salir</a></li>
-	</ul>
+</header>
+
+<main>
+	<nav>
+		<ul>
+			<h3>Datos de usuario</h3>
+			<li><a href="./datos_usuario.php">Modificar datos personales</a></li>
+			<li><a href="./contrasenna_usuario.php">Modificar contraseña</a></li>
+			<li><a href="./imagen_usuario.php">Modificar imagen de usuario</a></li>
+		</ul>
+	</nav>
+	<nav>
+		<ul>
+			<h3>Gestión de participaciones</h3>
+			<li><a href="">Dar de alta una participación</a></li>
+			<li><a href="">Modificar una participación</a></li>
+			<li><a href="">Dar de baja una participación</a></li>
+			<li><a href="">Listar participaciones</a></li>
+		</ul></nav>
+	<nav>
+		<ul>
+			<h3>Gestión de premios</h3>
+			<li>Consultar participaciones premiadas</li>
+			<li>Consultar premios acumulados</li>
+		</ul>
+		<?php
+		if ($_SESSION['is_admin'] == 1) {
+			echo '<ul>
+						<h3>Gestión de usuarios</h3>
+						<li><a href="">Incorporación de premios</a></li>
+						<li><a href="">Gestión de sorteos</a></li>
+						<li><a href="">Gestión de usuarios</a></li>
+					</ul>';
+		}
+		?>
+	</nav>
+</main>
+<form action="./datos_usuario.php" method="post" enctype="multipart/form-data">
+	<h3><input type="submit" name="log_out" value="Cerrar sesión"></h3>
+</form>
+<?php
+if (isset($_POST['log_out'])) {
+	closeSession();
+}
+?>
 </body>
 </html>
