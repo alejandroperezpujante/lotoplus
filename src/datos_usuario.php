@@ -94,19 +94,12 @@
 </header>
 <main>
 	<nav>
-		<h3><a href="./menu.php">Volver al menú</a></h3>
-		<form action="./datos_usuario.php" method="post" enctype="multipart/form-data">
-			<h3><input type="submit" name="log_out" value="Cerrar sesión"></h3>
-		</form>
-		<?php
-		if (isset($_POST['log_out'])) {
-			closeSession();
-		}
-		?>
+		<h3><a href="menu.php">Volver al menú</a></h3>
+		<h3><a href="logout.php">Cerrar sesión</a></h3>
 	</nav>
 
 	<?php
-	include '../database/config.php';
+	include '..//database/config.php';
 	include '../database/db.php';
 
 	$id = $_SESSION['id'];
@@ -117,7 +110,7 @@
 	$row = mysqli_fetch_assoc($res);
 
 	?>
-	<form action='./datos_usuario.php' method='post' enctype='multipart/form-data'>
+	<form action='datos_usuario.php' method='post' enctype='multipart/form-data'>
 		<table>
 			<tr>
 				<th>Nombre</th>

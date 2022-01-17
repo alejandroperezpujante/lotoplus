@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport"
 				content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
 	<style>
 		html {
 			font-family: BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -58,9 +59,9 @@
 	<nav>
 		<ul>
 			<h3>Datos de usuario</h3>
-			<li><a href="./datos_usuario.php">Modificar datos personales</a></li>
-			<li><a href="./contrasenna_usuario.php">Modificar contraseña</a></li>
-			<li><a href="./imagen_usuario.php">Modificar imagen de usuario</a></li>
+			<li><a href="datos_usuario.php">Modificar datos personales</a></li>
+			<li><a href="contrasenna_usuario.php">Modificar contraseña</a></li>
+			<li><a href="./user_data/imagen_usuario.php">Modificar imagen de usuario</a></li>
 		</ul>
 	</nav>
 	<nav>
@@ -79,23 +80,17 @@
 		</ul>
 		<?php
 		if ($_SESSION['is_admin'] == 1) {
-			echo '<ul>
-						<h3>Gestión de usuarios</h3>
-						<li><a href="">Incorporación de premios</a></li>
-						<li><a href="">Gestión de sorteos</a></li>
-						<li><a href="">Gestión de usuarios</a></li>
-					</ul>';
+			echo '
+				<ul>
+					<h3>Gestión de usuarios</h3>
+					<li><a href="">Incorporación de premios</a></li>
+					<li><a href="">Gestión de sorteos</a></li>
+					<li><a href="">Gestión de usuarios</a></li>
+				</ul>';
 		}
 		?>
 	</nav>
 </main>
-<form action="./datos_usuario.php" method="post" enctype="multipart/form-data">
-	<h3><input type="submit" name="log_out" value="Cerrar sesión"></h3>
-</form>
-<?php
-if (isset($_POST['log_out'])) {
-	closeSession();
-}
-?>
+<h3><a href="./logout.php">Cerrar sesión</a></h3>
 </body>
 </html>

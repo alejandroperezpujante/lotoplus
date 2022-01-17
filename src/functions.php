@@ -5,18 +5,25 @@ function checkSession() {
 	if(isset($_SESSION['id'])) {
 		echo "<h3>Bienvenido, " . $_SESSION['name'] . ".</h3>";
 	} else {
+		$_SESSION = array();
 		session_destroy();
-		header("Location: ../public/index.php");
+		header("Location: ../public/create_user.php");
 	}
 }
 
-// Close session
-// TODO: Fix the log out script
-function closeSession() {
-	session_destroy();
-	$session_data = session_get_cookie_params();
-	setcookie(session_name(),"",$session_data["path"],$session_data["domain"]);
-	header("Location: ../public/index.php");
+function checkSessionInitial() {
+	session_start();
+	if(isset($_SESSION['id'])) {
+		header("Location: ../src/menu.php");
+	} else {
+		$_SESSION = array();
+		session_destroy();
+	}
 }
 
-// Get user data from database and display it in the form to edit.
+// Get max date to allow to select in the form, and return it as a string. It can only allow 18 years old to select.
+function getMaxDate() {
+	$maxDate = date("Y-m-d", strtotime("-18 years"));
+	return $maxDate;
+}
+
