@@ -43,6 +43,12 @@
 			padding: 5px;
 			box-shadow: 5px 5px 5px #ccc;
 		}
+
+		footer {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
 	</style>
 	<title>Menú Principal</title>
 </head>
@@ -61,7 +67,7 @@
 			<h3>Datos de usuario</h3>
 			<li><a href="datos_usuario.php">Modificar datos personales</a></li>
 			<li><a href="contrasenna_usuario.php">Modificar contraseña</a></li>
-			<li><a href="./user_data/imagen_usuario.php">Modificar imagen de usuario</a></li>
+			<li><a href="avatar_usuario.php">Modificar imagen de usuario</a></li>
 		</ul>
 	</nav>
 	<nav>
@@ -91,6 +97,8 @@
 		?>
 	</nav>
 </main>
-<h3><a href="./logout.php">Cerrar sesión</a></h3>
+<footer>
+	<h3><a href="./logout.php">Cerrar sesión</a></h3>
+</footer>
 </body>
 </html>

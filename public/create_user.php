@@ -24,7 +24,7 @@ if (isset($_POST['submit'])) {
 	$sql = "SELECT * FROM lotoplusdb.users WHERE username = '$username'";
 	$result = mysqli_query($cnx, $sql) or die(mysqli_error($cnx));
 	if (mysqli_num_rows($result) > 0) {
-		echo '<div class="bg-red-500 text-white text-center p-2">El usuario ya existe</div>';
+		echo '<div class="grid place-content-center bg-red-500 text-white text-center p-2"><span>El usuario ya existe</span></div>';
 		header('Refresh: 2; url=./create_user.php');
 		exit();
 	}
