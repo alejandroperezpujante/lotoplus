@@ -84,18 +84,20 @@
 			<li>Consultar participaciones premiadas</li>
 			<li>Consultar premios acumulados</li>
 		</ul>
-		<?php
-		if ($_SESSION['is_admin'] == 1) {
-			echo '
-				<ul>
-					<h3>Gestión de usuarios</h3>
-					<li><a href="">Incorporación de premios</a></li>
-					<li><a href="">Gestión de sorteos</a></li>
-					<li><a href="">Gestión de usuarios</a></li>
-				</ul>';
-		}
-		?>
 	</nav>
+	<?php
+	if ($_SESSION['is_admin'] == 1) {
+		echo '
+				<nav>
+					<ul>
+						<h3>Administración</h3>
+						<li><a href="">Incorporación de premios</a></li>
+						<li><a href="">Gestión de sorteos</a></li>
+						<li><a href="">Gestión de usuarios</a></li>
+					</ul>
+				</nav>';
+	}
+	?>
 </main>
 <footer>
 	<h3><a href="./logout.php">Cerrar sesión</a></h3>

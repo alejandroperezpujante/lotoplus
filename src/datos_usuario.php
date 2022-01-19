@@ -62,6 +62,12 @@
 			margin-top: 20px;
 		}
 
+		.errors {
+			color: red;
+			display: grid;
+			place-content: center;
+		}
+
 		footer {
 			padding: 5px;
 			font-size: 1.2em;
@@ -162,11 +168,37 @@
 	mysqli_close($cnx);
 
 	if (isset($_POST['change_data'])) {
-		$name = $_POST['name'];
-		$surname = $_POST['surname'];
-		$username = $_POST['username'];
-		$email = $_POST['email'];
-		$phone = $_POST['phone'];
+		$errors = [];
+
+		if ((strlen($_POST['name']) <= 45) and (preg_match('/^[a-zA-Z ]+$/', $_POST['name'])) == 1) {
+			$name = $_POST['name'];
+		} else {
+			array_push($errors, 'Nombre con valor incorrecto');
+		}
+
+		if ((strlen($_POST['surname']) <= 65) and (preg_match('/^[a-zA-Z -]+$/', $_POST['surname'])) == 1) {
+			$surname = $_POST['surname'];
+		} else {
+			array_push($errors, 'Apellidos con valor incorrecto');
+		}
+
+		if ((strlen($_POST['username']) >= 3) and (strlen($_POST['username']) <= 30) and (preg_match('/^[a-zA-Z0-9]+$/', $_POST['username'])) == 1) {
+			$username = $_POST['username'];
+		} else {
+			array_push($errors, 'Nombre de usuario con valor incorrecto');
+		}
+
+		if ((preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/', $_POST['email'])) == 1) {
+			$email = $_POST['email'];
+		} else {
+			array_push($errors, 'Email con valor incorrecto');
+		}
+
+		if ((preg_match('/^[6|7][0-9]{8}$/', $_POST['phone'])) == 1) {
+			$phone = $_POST['phone'];
+		} else {
+			array_push($errors, 'Telefono con valor incorrecto');
+		}
 
 		if ($_POST['birth_date']) {
 			$birth = new DateTime($_POST['birth_date']);
@@ -174,12 +206,27 @@
 			if ($birth < $agelimit) {
 				$birth_date = $_POST['birth_date'];
 			} else {
-				echo '<p>La fecha no es válida, debe ser mayor de 18 años</p>';
-				exit();
+				array_push($errors, 'Fecha incorrecta');
 			}
 		}
 
-		$profits = $_POST['profits'];
+		if ((preg_match('/^[6|7][0-9]{8}$/', $_POST['profits'])) == 0) {
+			$profits = $_POST['profits'];
+		} else {
+			array_push($errors, 'Beneficios con valor incorrecto');
+		}
+
+		if (!empty($errors)) {
+			echo '<div class="errors">';
+			echo '<ul>';
+			foreach ($errors as $error) {
+				echo "<li>$error</li>";
+			}
+			echo '</ul>';
+			echo '</div>';
+			exit;
+		}
+
 		$account_type = ($_POST['account_type'] == 'free') ? 0 : 1;
 
 		if ($_POST['marketing'] == 'on') {
