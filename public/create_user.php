@@ -26,6 +26,7 @@ if (isset($_POST['submit'])) {
 	if (mysqli_num_rows($result) > 0) {
 		echo '<div class="grid place-content-center bg-red-500 text-white text-center p-2"><span>El usuario ya existe</span></div>';
 		header('Refresh: 2; url=./create_user.php');
+		$_POST = array();
 		exit();
 	}
 	$email = $_POST['email'];

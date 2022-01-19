@@ -3,7 +3,7 @@
 function checkSession() {
 	session_start();
 	if(isset($_SESSION['id'])) {
-		echo "<h3>Bienvenido, " . $_SESSION['name'] . ".</h3>";
+		echo "<h3>Buenas, " . $_SESSION['name'] . ".</h3>";
 	} else {
 		$_SESSION = array();
 		session_destroy();
@@ -26,4 +26,3 @@ function getMaxDate() {
 	$maxDate = date("Y-m-d", strtotime("-18 years"));
 	return $maxDate;
 }
-

@@ -134,6 +134,7 @@
 			if (password_verify($password, $row['password'])) {
 				$_SESSION['id'] = $row['user_id'];
 				$_SESSION['name'] = $row['name'];
+				$_SESSION['username'] = $row['username'];
 				$_SESSION['is_admin'] = $row['db_admin'];
 				header('Location: ../src/menu.php');
 			}

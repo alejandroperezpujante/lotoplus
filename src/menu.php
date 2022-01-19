@@ -73,11 +73,12 @@
 	<nav>
 		<ul>
 			<h3>Gestión de participaciones</h3>
-			<li><a href="">Dar de alta una participación</a></li>
+			<li><a href="nueva_participacion.php">Dar de alta una participación</a></li>
 			<li><a href="">Modificar una participación</a></li>
 			<li><a href="">Dar de baja una participación</a></li>
 			<li><a href="">Listar participaciones</a></li>
-		</ul></nav>
+		</ul>
+	</nav>
 	<nav>
 		<ul>
 			<h3>Gestión de premios</h3>
