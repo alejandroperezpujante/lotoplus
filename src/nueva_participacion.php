@@ -30,6 +30,25 @@
 			color: #ffffff;
 		}
 
+		nav {
+			display: flex;
+			margin-top: 1em;
+			justify-content: space-around;
+		}
+
+		a {
+			color: #ffffff;
+			text-decoration: none;
+			font-size: 1.2em;
+			font-weight: bold;
+			transition: 0.5s ease-in-out;
+		}
+
+		a:hover {
+			transition: 0.5s ease-in-out;
+			color: #75ffb2;
+		}
+
 		form {
 			display: flex;
 			flex-direction: column;
@@ -48,7 +67,6 @@
 			border-radius: 5px;
 			padding: 5px;
 			font-size: 1.2em;
-			color: #ffffff;
 		}
 
 
@@ -64,6 +82,16 @@
 			color: #003b60;
 			font-weight: bold;
 		}
+
+		#preview {
+			display: grid;
+			place-content: center;
+			width: 100%;
+			height: auto;
+			border-radius: 5px;
+			border: 1px solid #003b60;
+			margin-top: 2em;
+		}
 	</style>
 	<title>Nueva participación</title>
 </head>
@@ -74,6 +102,10 @@
 	include './functions.php';
 	checkSession();
 	?>
+	<nav>
+		<h3><a href="menu.php">Volver al menú</a></h3>
+		<h3><a href="logout.php">Cerrar sesión</a></h3>
+	</nav>
 </header>
 <main>
 	<form action="nueva_participacion.php" method="post" enctype="multipart/form-data">
@@ -103,6 +135,8 @@
 		<input type="number" name="amount" id="amount" min="1" max="9999" required>
 		<label for="file">Foto de la participación</label>
 		<input type="file" name="file" id="file" accept="image/*" required>
+		<div id="preview">
+		</div>
 		<input type="submit" name="submit" id="submit" value="Registrar participación">
 	</form>
 	<?php
@@ -127,7 +161,6 @@
 				$errors[] = "El archivo debe ser una imagen";
 			}
 		}
-
 		if (count($errors) > 0) {
 			echo "<ul>";
 			foreach ($errors as $error) {
@@ -138,31 +171,47 @@
 			$id = $_SESSION['id'];
 
 			$copiedIMG = false;
-			if (is_uploaded_file($_FILES['user-img']['tmp_name'])) {
+			if (is_uploaded_file($_FILES['file']['tmp_name'])) {
 				// Route to the folder where the images will be stored
 				// And create a unique ID
-				$imgRute = "../src/assets/img/";
-				$imgName = $_FILES['user-img']['name'];
+				$imgRute = "./assets/participations/";
+				$imgName = $_FILES['file']['name'];
 				$imgID = time();
 				$imgName = $imgID . "-" . $imgName;
 				$copiedIMG = true;
 
 				// If the IMG is uploaded and the IMG is not a duplicate of an existing IMG then copy the IMG to the folder
 				if ($copiedIMG) {
-					move_uploaded_file($_FILES['user-img']['tmp_name'], $imgRute . $imgName);
+					move_uploaded_file($_FILES['file']['tmp_name'], $imgRute . $imgName);
 				}
 
 				$imgRute = $imgRute . $imgName;
-
-				$cnx = db();
-				$sql = "INSERT INTO lotoplusdb.participations (user_id, draw_id, number, amount, snapshot) VALUES ('$id', '$draw_id', '$number', '$amount', '$imgRute')";
-				mysqli_close($cnx);
-				echo "<p>Participación registrada correctamente</p>";
 			}
+			$cnx = db();
+			$sql = "INSERT INTO lotoplusdb.participations (user_id, draw_id, number, amount, snapshot) VALUES ('$id', '$draw_id', '$number', '$amount', '$imgRute')";
+			echo "<h2>Participación registrada correctamente</h2>";
+			$res = mysqli_query($cnx, $sql) or die(mysqli_error($cnx));
+			mysqli_close($cnx);
 		}
 	}
 	?>
 </main>
+<script>
+	document.getElementById("file").onchange = function(e) {
+		let reader = new FileReader();
 
+		reader.readAsDataURL(e.target.files[0]);
+
+		reader.onload = function(){
+			let preview = document.getElementById('preview'),
+				image = document.createElement('img');
+
+			image.src = reader.result;
+
+			preview.innerHTML = '';
+			preview.append(image);
+		};
+	}
+</script>
 </body>
 </html>

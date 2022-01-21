@@ -73,9 +73,11 @@
 		<img src="<?php echo $img; ?>" alt="avatar" width="200" height="200">
 	</picture>
 	<form action="avatar_usuario.php" method="post" enctype="multipart/form-data">
-		<input type="file" name="user-img">
+		<input type="file" id="file" name="user-img">
 		<input type="submit" name="submit" id="submit" value="Subir">
 	</form>
+	<h3>Imagen a subir:</h3>
+	<div id="preview"></div>
 	<?php
 	if (isset($_POST['submit'])) {
 		// IMG handler
@@ -118,5 +120,22 @@
 	}
 	?>
 </main>
+<script>
+	document.getElementById("file").onchange = function(e) {
+		let reader = new FileReader();
+
+		reader.readAsDataURL(e.target.files[0]);
+
+		reader.onload = function(){
+			let preview = document.getElementById('preview'),
+				image = document.createElement('img');
+
+			image.src = reader.result;
+
+			preview.innerHTML = '';
+			preview.append(image);
+		};
+	}
+</script>
 </body>
 </html>

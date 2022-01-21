@@ -181,13 +181,12 @@
 		} else {
 			array_push($errors, 'Apellidos con valor incorrecto');
 		}
-
+		// TODO: AJAX to fetch usernames on type
 		if ((strlen($_POST['username']) >= 3) and (strlen($_POST['username']) <= 30) and (preg_match('/^[a-zA-Z0-9]+$/', $_POST['username'])) == 1) {
 			$username = $_POST['username'];
 			$cnx = db();
 			$sql = "SELECT * FROM lotoplusdb.users WHERE username = '$username'";
 			$result = mysqli_query($cnx, $sql) or die(mysqli_error($cnx));
-			// TODO: Check logic
 			if ((mysqli_num_rows($result) > 0) xor ($_SESSION['username'] == $username)) {
 				array_push($errors, 'El usuario indicado ya existe');
 				mysqli_free_result($result);
@@ -245,7 +244,7 @@
 		}
 
 		$cnx = db();
-		$sql = "UPDATE lotoplusdb.users SET name = '$name', surname = '$surname', username = '$username', email = '$email', phone = '$phone', birth_date = '$birth_date', profits = '$profits', account_type = '$account_type', marketing = '$marketing'";
+		$sql = "UPDATE lotoplusdb.users SET name = '$name', surname = '$surname', username = '$username', email = '$email', phone = '$phone', birth_date = '$birth_date', profits = '$profits', account_type = '$account_type', marketing = '$marketing' WHERE user_id ='$id'";
 		$res = mysqli_query($cnx, $sql) or die(mysqli_error($cnx));
 		header("Refresh:0");
 	}

@@ -74,9 +74,9 @@
 		<ul>
 			<h3>Gestión de participaciones</h3>
 			<li><a href="nueva_participacion.php">Dar de alta una participación</a></li>
-			<li><a href="">Modificar una participación</a></li>
-			<li><a href="">Dar de baja una participación</a></li>
-			<li><a href="">Listar participaciones</a></li>
+			<li><a href="modificar_participacion.php">Modificar una participación</a></li>
+			<li><a href="borrar_participacion.php">Dar de baja una participación</a></li>
+			<li><a href="listar_participaciones.php">Listar participaciones</a></li>
 		</ul>
 	</nav>
 	<nav>

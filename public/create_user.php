@@ -149,6 +149,7 @@ if (isset($_POST['submit'])) {
 					<br/>
 					<label for="user-img" class="text-lg font-bold">Imagen de usuario:</label><br/>
 					<input type="file" name="user-img" id="user-img" accept="image/png, image/jpeg, image/gif" size="1024"/>
+					<div id="preview"></div>
 					<br/>
 					<br/>
 					<label for="account-type" class="text-lg font-bold">Tipo de cuenta:</label><br/>
@@ -220,5 +221,22 @@ if (isset($_POST['submit'])) {
 }
 ?>
 <script src="main.js"></script>
+<script>
+	document.getElementById("user-img").onchange = function(e) {
+		let reader = new FileReader();
+
+		reader.readAsDataURL(e.target.files[0]);
+
+		reader.onload = function(){
+			let preview = document.getElementById('preview'),
+				image = document.createElement('img');
+
+			image.src = reader.result;
+
+			preview.innerHTML = '';
+			preview.append(image);
+		};
+	}
+</script>
 </body>
 </html>
