@@ -205,7 +205,7 @@
 			} else {
 				$sql = "UPDATE lotoplusdb.participations SET number = '$number', amount = '$amount' WHERE user_id = $id";
 			}
-			echo $sql;
+
 			$cnx = db();
 			$res = $cnx -> query($sql) or die(mysqli_error($cnx));
 			$cnx -> close();

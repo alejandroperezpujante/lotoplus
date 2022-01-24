@@ -130,7 +130,7 @@
 			?>
 		</select>
 		<label for="number">Número de la participación</label>
-		<input type="number" name="number" id="number" min="1" max="99" required>
+		<input type="number" name="number" id="number" min="1" max="99999" required>
 		<label for="amount">Importe jugado</label>
 		<input type="number" name="amount" id="amount" min="1" max="9999" required>
 		<label for="file">Foto de la participación</label>
@@ -148,7 +148,7 @@
 		$amount = $_POST['amount'];
 		$file = $_FILES['file'];
 
-		if ($number < 1 || $number > 99) {
+		if ($number < 1 || $number > 99999) {
 			$errors[] = "El número de la participación debe estar entre 1 y 99";
 		}
 
@@ -197,12 +197,12 @@
 	?>
 </main>
 <script>
-	document.getElementById("file").onchange = function(e) {
+	document.getElementById("file").onchange = function (e) {
 		let reader = new FileReader();
 
 		reader.readAsDataURL(e.target.files[0]);
 
-		reader.onload = function(){
+		reader.onload = function () {
 			let preview = document.getElementById('preview'),
 				image = document.createElement('img');
 

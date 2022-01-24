@@ -127,10 +127,9 @@
 			} else {
 				echo '<p>Contraseña anterior incorrecta</p>';
 			}
+			mysqli_close($cnx);
 		}
 	}
-	mysqli_free_result($res);
-	mysqli_close($cnx);
 	?>
 </main>
 

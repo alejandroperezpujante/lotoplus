@@ -32,16 +32,15 @@
 			border-radius: 10px;
 		}
 
-		form {
-			display: grid;
-			place-content: center;
+		a {
+			text-decoration: none;
+			color: #000;
+			transition: all 0.2s ease-in-out;
 		}
 
-		input {
-			border-radius: 6px;
-			border: solid black 1px;
-			padding: 5px;
-			box-shadow: 5px 5px 5px #ccc;
+		a:hover {
+			color: #006699;
+			text-shadow: 1px 1px .5px #a6a6a6;
 		}
 
 		footer {
@@ -82,8 +81,8 @@
 	<nav>
 		<ul>
 			<h3>Gestión de premios</h3>
-			<li>Consultar participaciones premiadas</li>
-			<li>Consultar premios acumulados</li>
+			<li><a href="listar_premios.php">Consultar mis participaciones premiadas</a></li>
+			<li><a href="premios_acumulados.php">Consultar mis premios acumulados</a></li>
 		</ul>
 	</nav>
 	<?php
@@ -92,9 +91,9 @@
 				<nav>
 					<ul>
 						<h3>Administración</h3>
-						<li><a href="">Incorporación de premios</a></li>
+						<li><a href="annadir_premios.php">Incorporación de premios</a></li>
 						<li><a href="">Gestión de sorteos</a></li>
-						<li><a href="">Gestión de usuarios</a></li>
+						<li><a href="admin_modificar_usuarios.php">Gestión de usuarios</a></li>
 					</ul>
 				</nav>';
 	}

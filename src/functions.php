@@ -7,7 +7,7 @@ function checkSession() {
 	} else {
 		$_SESSION = array();
 		session_destroy();
-		header("Location: ../public/create_user.php");
+		header("Location: ../public/index.php");
 	}
 }
 
